@@ -30,5 +30,17 @@ options:
 
 ## Ejemplos
 
+### Sin filtros: El ouput es un listado de todas las máquinas ordenado por dificultad.
+[Sin Filtros](ejemplos/sin_filtros.png)
 
+### Random: El ouput es una máquina random del listado completo existente.
+[Sin Filtros](ejemplos/random.png)
 
+### Random + Filtro de Dificultad: El ouput es una máquina random del listado de maquinas con la dificultad que escojas.
+[Sin Filtros](ejemplos/random+Medio.png)
+
+### Filtro de dificultad: El ouput es un listado de todas las máquinas con la dificultad que escojas.
+[Sin Filtros](ejemplos/dificultad.png)
+
+### Filtro de nombre: El ouput es la información sobre máquina que escojas.
+[Sin Filtros](ejemplos/nombre.png)
