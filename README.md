@@ -17,15 +17,19 @@ pip3 install -r requirements.txt
 ## Uso
 
 ```
-usage: geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE]
+usage: get_target.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-nb] [-D DONE]
 
 Busca tu máquina de Dockerlabs.
 
 options:
   -h, --help            show this help message and exit
-  -d DIFICULTAD, --dificultad DIFICULTAD   Filtrar por dificultad. ['Muy Facil', 'Facil', 'Medio', 'Dificil']
-  -r, --random                  Máquina aleatoria.
-  -n NOMBRE, --nombre NOMBRE    Buscar una máquina concreta.
+  -d DIFICULTAD, --dificultad DIFICULTAD
+                        Filtrar por dificultad. ['Muy Fácil', 'Fácil', 'Medio', 'Difícil']
+  -r, --random          Máquina aleatoria.
+  -n NOMBRE, --nombre NOMBRE
+                        Buscar una máquina concreta.
+  -nb, --no-banner      Eliminar el banner del output.
+  -D DONE, --Done DONE  Marcar una máquina como hecha.
 ```
 
 ## Ejemplos
