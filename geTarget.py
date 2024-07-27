@@ -1,6 +1,5 @@
 #!/bin/python3
 #Creator: PatxaSec
-
 import argparse
 import random
 import requests
@@ -8,9 +7,9 @@ from bs4 import BeautifulSoup, Tag
 import re
 from colorama import init, Fore, Style
 import unidecode
+import os
 
 init()
-
 
 VERDE = Fore.GREEN
 AZUL = Fore.BLUE
@@ -20,36 +19,52 @@ ROJO = Fore.RED
 NORMAL = Style.RESET_ALL
 
 banner = '''
-    
     ██████╗  ██████╗  ██████╗██╗  ██╗███████╗██████╗ ██╗      █████╗ ██████╗ ███████╗     ██████╗██╗     ██╗
     ██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝██╔════╝██╔══██╗██║     ██╔══██╗██╔══██╗██╔════╝    ██╔════╝██║     ██║
     ██║  ██║██║   ██║██║     █████╔╝ █████╗  ██████╔╝██║     ███████║██████╔╝███████╗    ██║     ██║     ██║
     ██║  ██║██║   ██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗██║     ██╔══██║██╔══██╗╚════██║    ██║     ██║     ██║
     ██████╔╝╚██████╔╝╚██████╗██║  ██╗███████╗██║  ██║███████╗██║  ██║██████╔╝███████║    ╚██████╗███████╗██║
     ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝     ╚═════╝╚══════╝╚═╝
-                                                                                                        
     Made with LOVE by @PatxaSec                      Para ver WriteUps visita: http://beta.dockerlabs.es/#/
-    '''
-    
+'''
+
+MAQUINAS_HECHAS_FILENAME = "maquinas_hechas.txt"
+
+# Leer máquinas hechas desde el archivo
+def leer_maquinas_hechas():
+    if not os.path.exists(MAQUINAS_HECHAS_FILENAME):
+        return set()
+    with open(MAQUINAS_HECHAS_FILENAME, "r") as file:
+        return set(line.strip().lower() for line in file)
+
+# Escribir una máquina hecha en el archivo
+def escribir_maquina_hecha(maquina):
+    with open(MAQUINAS_HECHAS_FILENAME, "a") as file:
+        file.write(maquina.lower() + "\n")
+
+# Argumentos del script
 parser = argparse.ArgumentParser(description='Busca tu máquina de Dockerlabs.')
 parser.add_argument('-d', '--dificultad', help="Filtrar por dificultad. ['Muy Fácil', 'Fácil', 'Medio', 'Difícil']")
 parser.add_argument('-r', '--random', action='store_true', help='Máquina aleatoria.')
 parser.add_argument('-n', '--nombre', help='Buscar una máquina concreta.')
-parser.add_argument('-nb', '--no-banner', help='Eliminar el banner del output.')
+parser.add_argument('-nb', '--no-banner', action='store_true', help='Eliminar el banner del output.')
+parser.add_argument('-D', '--Done', help='Marcar una máquina como hecha.')
 args = parser.parse_args()
+
 url = 'http://beta.dockerlabs.es/#/'
 
 response = requests.get(url)
-
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.content, 'html.parser')
     docker_rows = soup.find_all("div", 'item')
     dificultad = [unidecode.unidecode(d).lower() for d in ['Muy Fácil', 'Fácil', 'Medio', 'Difícil']]
+    
     if not args.no_banner:
         print(f'{AZUL}{banner}{NORMAL}')
     else:
         print()
+
     machines = []
     for row in docker_rows:
         name = row.find("span").find("strong")
@@ -64,8 +79,26 @@ if response.status_code == 200:
 
         machines.append((name_text.lower(), difficulty_text.lower(), download_text, size_text))
 
+    maquinas_hechas = leer_maquinas_hechas()
+
+    if args.Done:
+        maquina = args.Done.lower()
+        if maquina in maquinas_hechas:
+            print(f"{AMARILLO}[!] La máquina '{maquina}' ya está marcada como hecha.{NORMAL}")
+        elif any(maquina == m[0] for m in machines):
+            escribir_maquina_hecha(maquina)
+            print(f"{VERDE}[+] Máquina '{maquina}' marcada como hecha.{NORMAL}")
+        else:
+            print(f"{AMARILLO}[!] La máquina '{maquina}' no existe.{NORMAL}")
+        print(f"{VERDE}Agradecimientos a @elpingüinodemario por crear {url} y darnos otra forma de jugar.{NORMAL}")
+        exit()
+
+    # Excluir máquinas ya hechas de la lista principal
+    machines_done = [machine for machine in machines if machine[0] in maquinas_hechas]
+    machines_to_do = [machine for machine in machines if machine[0] not in maquinas_hechas]
+
     if args.dificultad:
-        filtered_machines = [machine for machine in machines if machine[1] == args.dificultad.lower()]
+        filtered_machines = [machine for machine in machines_to_do if machine[1] == args.dificultad.lower()]
         if filtered_machines:
             if args.random:
                 random_machine = random.choice(filtered_machines)
@@ -73,34 +106,47 @@ if response.status_code == 200:
                 print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()}")
                 print(f"{PURPLE}Tamaño de descarga:{NORMAL} {random_machine[3]}")
                 print(f"{PURPLE}Link de descarga:{NORMAL} {random_machine[2]}")
+                print()
             else:
                 print(f"{VERDE}[+] Las máquinas de nivel {args.dificultad.capitalize()} son:{NORMAL}")
                 for machine in filtered_machines:
                     print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}")
                     print(f"{PURPLE}Tamaño de descarga:{NORMAL} {machine[3]}")
                     print(f"{PURPLE}Link de descarga:{NORMAL} {machine[2]}")
+                    print()
         else:
             print(f"{AMARILLO}[!] No hay máquinas de dificultad {args.dificultad}.{NORMAL}")
     elif args.nombre:
         found_machine = next((machine for machine in machines if machine[0] == args.nombre.lower()), None)
+
         if found_machine:
             print(f"{VERDE}[+]======================> {found_machine[1].capitalize()}{NORMAL}")
             print(f"{AZUL}Nombre:{NORMAL} {found_machine[0].capitalize()}")
             print(f"{PURPLE}Tamaño de descarga:{NORMAL} {found_machine[3]}")
             print(f"{PURPLE}Link de descarga:{NORMAL} {found_machine[2]}")
+            if found_machine[0] in maquinas_hechas:
+                print(f"{AMARILLO}[!] Esta máquina ya está marcada como hecha.{NORMAL}")
+            print()
         else:
-            print(f"{AMARILLO}[!] No hay ninguna máquina con el nombre de {args.nombre}.{NORMAL}")
+            if args.nombre.lower() in maquinas_hechas:
+                print(f"{AMARILLO}[!] La máquina '{args.nombre}' está marcada como hecha, pero no se encuentra en la lista actual de máquinas.{NORMAL}")
+            else:
+                print(f"{AMARILLO}[!] No hay ninguna máquina con el nombre de {args.nombre}.{NORMAL}")
         
     else:
         if args.random:
-            random_machine = random.choice(machines)
-            print(f"{VERDE}[+]======================> {random_machine[1].capitalize()}{NORMAL}")
-            print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()}")
-            print(f"{PURPLE}Tamaño de descarga: {NORMAL}{random_machine[3]}")
-            print(f"{PURPLE}Link de descarga:{NORMAL} {random_machine[2]}")
+            if machines:
+                random_machine = random.choice(machines)
+                print(f"{VERDE}[+]======================> {random_machine[1].capitalize()}{NORMAL}")
+                print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()}")
+                print(f"{PURPLE}Tamaño de descarga:{NORMAL} {random_machine[3]}")
+                print(f"{PURPLE}Link de descarga:{NORMAL} {random_machine[2]}")
+                print()
+            else:
+                print(f"{AMARILLO}[!] No hay máquinas disponibles para mostrar.{NORMAL}")
         else:
             for dif in dificultad:
-                filtered_machines = [machine for machine in machines if machine[1] == dif.lower()]
+                filtered_machines = [machine for machine in machines_to_do if machine[1] == dif]
                 if filtered_machines:
                     print(f"{VERDE}[+]======================> {dif.capitalize()}{NORMAL}")
                     for machine in filtered_machines:
@@ -109,8 +155,10 @@ if response.status_code == 200:
                         print(f"{PURPLE}Link de descarga:{NORMAL} {machine[2]}")
                         print() 
                 else:
-                    print(f"{AMARILLO}[!] No hay máquinas de dificultad {dif}.{NORMAL}")
+                    print(f"{AMARILLO}[!] No hay máquinas de dificultad {dif.capitalize()}.{NORMAL}")
                 print()  
-
+    
 else:
     print(f"{ROJO}[x] Error al acceder a la página: {response.status_code}{NORMAL}")
+
+print(f"{VERDE}Agradecimientos a @elpingüinodemario por crear {url} y darnos otra forma de jugar.{NORMAL}")
