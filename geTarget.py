@@ -80,6 +80,7 @@ if response.status_code == 200:
         machines.append((name_text.lower(), difficulty_text.lower(), download_text, size_text))
 
     maquinas_hechas = leer_maquinas_hechas()
+    maquinas_por_hacer = [machine for machine in machines if machine[0] not in maquinas_hechas]
 
     if args.Done:
         maquina = args.Done.lower()
@@ -93,24 +94,26 @@ if response.status_code == 200:
         print(f"{VERDE}Agradecimientos a @elpingüinodemario por crear {url} y darnos otra forma de jugar.{NORMAL}")
         exit()
 
-    # Excluir máquinas ya hechas de la lista principal
-    machines_done = [machine for machine in machines if machine[0] in maquinas_hechas]
-    machines_to_do = [machine for machine in machines if machine[0] not in maquinas_hechas]
-
     if args.dificultad:
-        filtered_machines = [machine for machine in machines_to_do if machine[1] == args.dificultad.lower()]
+        filtered_machines = [machine for machine in machines if machine[1] == args.dificultad.lower()]
         if filtered_machines:
             if args.random:
                 random_machine = random.choice(filtered_machines)
                 print(f"{VERDE}[+] La máquina de nivel {random_machine[1].capitalize()} que te ha tocado es:{NORMAL}")
-                print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()}")
+                if args.dificultad in maquinas_hechas:
+                    print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()} {AMARILLO} [!] Hecha!{NORMAL}")
+                else:
+                    print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()}")
                 print(f"{PURPLE}Tamaño de descarga:{NORMAL} {random_machine[3]}")
                 print(f"{PURPLE}Link de descarga:{NORMAL} {random_machine[2]}")
                 print()
             else:
                 print(f"{VERDE}[+] Las máquinas de nivel {args.dificultad.capitalize()} son:{NORMAL}")
                 for machine in filtered_machines:
-                    print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}")
+                    if machine[0] in maquinas_hechas:
+                        print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}{AMARILLO} [!] Hecha!{NORMAL}")
+                    else:
+                        print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}")
                     print(f"{PURPLE}Tamaño de descarga:{NORMAL} {machine[3]}")
                     print(f"{PURPLE}Link de descarga:{NORMAL} {machine[2]}")
                     print()
@@ -118,7 +121,6 @@ if response.status_code == 200:
             print(f"{AMARILLO}[!] No hay máquinas de dificultad {args.dificultad}.{NORMAL}")
     elif args.nombre:
         found_machine = next((machine for machine in machines if machine[0] == args.nombre.lower()), None)
-
         if found_machine:
             print(f"{VERDE}[+]======================> {found_machine[1].capitalize()}{NORMAL}")
             print(f"{AZUL}Nombre:{NORMAL} {found_machine[0].capitalize()}")
@@ -136,7 +138,7 @@ if response.status_code == 200:
     else:
         if args.random:
             if machines:
-                random_machine = random.choice(machines)
+                random_machine = random.choice(maquinas_por_hacer)
                 print(f"{VERDE}[+]======================> {random_machine[1].capitalize()}{NORMAL}")
                 print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()}")
                 print(f"{PURPLE}Tamaño de descarga:{NORMAL} {random_machine[3]}")
@@ -146,11 +148,14 @@ if response.status_code == 200:
                 print(f"{AMARILLO}[!] No hay máquinas disponibles para mostrar.{NORMAL}")
         else:
             for dif in dificultad:
-                filtered_machines = [machine for machine in machines_to_do if machine[1] == dif]
+                filtered_machines = [machine for machine in machines if machine[1] == dif]
                 if filtered_machines:
                     print(f"{VERDE}[+]======================> {dif.capitalize()}{NORMAL}")
                     for machine in filtered_machines:
-                        print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}")
+                        if machine[0] in maquinas_hechas:
+                            print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()} {AMARILLO} [!] Hecha!{NORMAL}")
+                        else:
+                            print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}")
                         print(f"{PURPLE}Tamaño de descarga:{NORMAL} {machine[3]}")
                         print(f"{PURPLE}Link de descarga:{NORMAL} {machine[2]}")
                         print() 
