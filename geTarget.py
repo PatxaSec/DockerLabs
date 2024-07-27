@@ -95,15 +95,13 @@ if response.status_code == 200:
         exit()
 
     if args.dificultad:
-        filtered_machines = [machine for machine in machines if machine[1] == args.dificultad.lower()]
+        filtered_machines = [machine for machine in machines if machine[1] == args.dificultad.lower()] 
+        random_filtered_machines = [machines for machines in maquinas_por_hacer if machines[1] == args.dificultad.lower()] 
         if filtered_machines:
             if args.random:
-                random_machine = random.choice(filtered_machines)
+                random_machine = random.choice(random_filtered_machines)
                 print(f"{VERDE}[+] La máquina de nivel {random_machine[1].capitalize()} que te ha tocado es:{NORMAL}")
-                if args.dificultad in maquinas_hechas:
-                    print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()} {AMARILLO} [!] Hecha!{NORMAL}")
-                else:
-                    print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()}")
+                print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()}")
                 print(f"{PURPLE}Tamaño de descarga:{NORMAL} {random_machine[3]}")
                 print(f"{PURPLE}Link de descarga:{NORMAL} {random_machine[2]}")
                 print()
