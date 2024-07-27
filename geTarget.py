@@ -1,3 +1,6 @@
+#!/bin/python3
+#Creator: PatxaSec
+
 import argparse
 import random
 import requests
@@ -16,10 +19,23 @@ AMARILLO = Fore.YELLOW
 ROJO = Fore.RED
 NORMAL = Style.RESET_ALL
 
+banner = '''
+    
+    ██████╗  ██████╗  ██████╗██╗  ██╗███████╗██████╗ ██╗      █████╗ ██████╗ ███████╗     ██████╗██╗     ██╗
+    ██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝██╔════╝██╔══██╗██║     ██╔══██╗██╔══██╗██╔════╝    ██╔════╝██║     ██║
+    ██║  ██║██║   ██║██║     █████╔╝ █████╗  ██████╔╝██║     ███████║██████╔╝███████╗    ██║     ██║     ██║
+    ██║  ██║██║   ██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗██║     ██╔══██║██╔══██╗╚════██║    ██║     ██║     ██║
+    ██████╔╝╚██████╔╝╚██████╗██║  ██╗███████╗██║  ██║███████╗██║  ██║██████╔╝███████║    ╚██████╗███████╗██║
+    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝     ╚═════╝╚══════╝╚═╝
+                                                                                                        
+    Made with LOVE by @PatxaSec                      Para ver WriteUps visita: http://beta.dockerlabs.es/#/
+    '''
+    
 parser = argparse.ArgumentParser(description='Busca tu máquina de Dockerlabs.')
 parser.add_argument('-d', '--dificultad', help="Filtrar por dificultad. ['Muy Fácil', 'Fácil', 'Medio', 'Difícil']")
 parser.add_argument('-r', '--random', action='store_true', help='Máquina aleatoria.')
 parser.add_argument('-n', '--nombre', help='Buscar una máquina concreta.')
+parser.add_argument('-nb', '--no-banner', help='Eliminar el banner del output.')
 args = parser.parse_args()
 url = 'http://beta.dockerlabs.es/#/'
 
@@ -30,8 +46,10 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.content, 'html.parser')
     docker_rows = soup.find_all("div", 'item')
     dificultad = [unidecode.unidecode(d).lower() for d in ['Muy Fácil', 'Fácil', 'Medio', 'Difícil']]
-
-
+    if not args.no_banner:
+        print(f'{AZUL}{banner}{NORMAL}')
+    else:
+        print()
     machines = []
     for row in docker_rows:
         name = row.find("span").find("strong")
@@ -52,24 +70,24 @@ if response.status_code == 200:
             if args.random:
                 random_machine = random.choice(filtered_machines)
                 print(f"{VERDE}[+] La máquina de nivel {random_machine[1].capitalize()} que te ha tocado es:{NORMAL}")
-                print(f"{AZUL}Nombre: {random_machine[0].capitalize()}{NORMAL}")
-                print(f"{PURPLE}Tamaño de descarga: {random_machine[3]}{NORMAL}")
-                print(f"{PURPLE}Link de descarga: {random_machine[2]}{NORMAL}")
+                print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()}")
+                print(f"{PURPLE}Tamaño de descarga:{NORMAL} {random_machine[3]}")
+                print(f"{PURPLE}Link de descarga:{NORMAL} {random_machine[2]}")
             else:
                 print(f"{VERDE}[+] Las máquinas de nivel {args.dificultad.capitalize()} son:{NORMAL}")
                 for machine in filtered_machines:
-                    print(f"{AZUL}Nombre: {machine[0].capitalize()}{NORMAL}")
-                    print(f"{PURPLE}Tamaño de descarga: {machines[3][3]}{NORMAL}")
-                    print(f"{PURPLE}Link de descarga: {machine[2]}{NORMAL}")
+                    print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}")
+                    print(f"{PURPLE}Tamaño de descarga:{NORMAL} {machine[3]}")
+                    print(f"{PURPLE}Link de descarga:{NORMAL} {machine[2]}")
         else:
             print(f"{AMARILLO}[!] No hay máquinas de dificultad {args.dificultad}.{NORMAL}")
     elif args.nombre:
         found_machine = next((machine for machine in machines if machine[0] == args.nombre.lower()), None)
         if found_machine:
             print(f"{VERDE}[+]======================> {found_machine[1].capitalize()}{NORMAL}")
-            print(f"{AZUL}Nombre: {found_machine[0].capitalize()}{NORMAL}")
-            print(f"{PURPLE}Tamaño de descarga: {found_machine[3]}{NORMAL}")
-            print(f"{PURPLE}Link de descarga: {found_machine[2]}{NORMAL}")
+            print(f"{AZUL}Nombre:{NORMAL} {found_machine[0].capitalize()}")
+            print(f"{PURPLE}Tamaño de descarga:{NORMAL} {found_machine[3]}")
+            print(f"{PURPLE}Link de descarga:{NORMAL} {found_machine[2]}")
         else:
             print(f"{AMARILLO}[!] No hay ninguna máquina con el nombre de {args.nombre}.{NORMAL}")
         
@@ -77,18 +95,18 @@ if response.status_code == 200:
         if args.random:
             random_machine = random.choice(machines)
             print(f"{VERDE}[+]======================> {random_machine[1].capitalize()}{NORMAL}")
-            print(f"{AZUL}Nombre: {random_machine[0].capitalize()}{NORMAL}")
-            print(f"{PURPLE}Tamaño de descarga: {random_machine[3]}{NORMAL}")
-            print(f"{PURPLE}Link de descarga: {random_machine[2]}{NORMAL}")
+            print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()}")
+            print(f"{PURPLE}Tamaño de descarga: {NORMAL}{random_machine[3]}")
+            print(f"{PURPLE}Link de descarga:{NORMAL} {random_machine[2]}")
         else:
             for dif in dificultad:
                 filtered_machines = [machine for machine in machines if machine[1] == dif.lower()]
                 if filtered_machines:
                     print(f"{VERDE}[+]======================> {dif.capitalize()}{NORMAL}")
                     for machine in filtered_machines:
-                        print(f"{AZUL}Nombre: {machine[0].capitalize()}{NORMAL}")
-                        print(f"{PURPLE}Tamaño de descarga: {machine[3]}{NORMAL}")
-                        print(f"{PURPLE}Link de descarga: {machine[2]}{NORMAL}")
+                        print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}")
+                        print(f"{PURPLE}Tamaño de descarga:{NORMAL} {machine[3]}")
+                        print(f"{PURPLE}Link de descarga:{NORMAL} {machine[2]}")
                         print() 
                 else:
                     print(f"{AMARILLO}[!] No hay máquinas de dificultad {dif}.{NORMAL}")
@@ -96,4 +114,3 @@ if response.status_code == 200:
 
 else:
     print(f"{ROJO}[x] Error al acceder a la página: {response.status_code}{NORMAL}")
-
