@@ -25,7 +25,7 @@ pip3 install -r requirements.txt
 ## Uso
 
 ```
-usage: get_target.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-nb] [-D DONE]
+usage: geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-nb] [-D DONE]
 
 Busca tu máquina de Dockerlabs.
 
