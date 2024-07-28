@@ -107,6 +107,7 @@ if response.status_code == 200:
                 print()
             else:
                 print(f"{VERDE}[+] Las máquinas de nivel {args.dificultad.capitalize()} son:{NORMAL}")
+                print()
                 for machine in filtered_machines:
                     if machine[0] in maquinas_hechas:
                         print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}{AMARILLO} [!] Hecha!{NORMAL}")
@@ -121,6 +122,7 @@ if response.status_code == 200:
         found_machine = next((machine for machine in machines if machine[0] == args.nombre.lower()), None)
         if found_machine:
             print(f"{VERDE}[+]======================> {found_machine[1].capitalize()}{NORMAL}")
+            print()
             print(f"{AZUL}Nombre:{NORMAL} {found_machine[0].capitalize()}")
             print(f"{PURPLE}Tamaño de descarga:{NORMAL} {found_machine[3]}")
             print(f"{PURPLE}Link de descarga:{NORMAL} {found_machine[2]}")
@@ -138,6 +140,7 @@ if response.status_code == 200:
             if machines:
                 random_machine = random.choice(maquinas_por_hacer)
                 print(f"{VERDE}[+]======================> {random_machine[1].capitalize()}{NORMAL}")
+                print()
                 print(f"{AZUL}Nombre:{NORMAL} {random_machine[0].capitalize()}")
                 print(f"{PURPLE}Tamaño de descarga:{NORMAL} {random_machine[3]}")
                 print(f"{PURPLE}Link de descarga:{NORMAL} {random_machine[2]}")
@@ -149,6 +152,7 @@ if response.status_code == 200:
                 filtered_machines = [machine for machine in machines if machine[1] == dif]
                 if filtered_machines:
                     print(f"{VERDE}[+]======================> {dif.capitalize()}{NORMAL}")
+                    print()
                     for machine in filtered_machines:
                         if machine[0] in maquinas_hechas:
                             print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()} {AMARILLO} [!] Hecha!{NORMAL}")
