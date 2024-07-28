@@ -3,7 +3,7 @@
 Herramienta que mediante el scrapping de la web, permite obtener diferentes resultados.
 
 Con esta herramienta puedes:
-- Listar, ordenadas por dificultad todas la máquinas disponibles, junto con la memoria de descarga y su link.
+- Listar, ordenadas por dificultad, todas la máquinas disponibles junto con la memoria de descarga y su link.
 - Listar Filtradas por la dificultad que escojas todas las máquinas disponibles en esa dificultad. `-d <dificultad>`
 - Sacar una máquina aleatoria del listado completo. `-r`
 - Sacar una máquina aleatoria de una dificultad concreta. `-r`+`-d <dificultad>`
