@@ -9,6 +9,7 @@ Con esta herramienta puedes:
 - Sacar una máquina aleatoria de una dificultad concreta. `-r`+`-d <dificultad>`
 - Guardar las máquinas ya hechas para que el output te avise, y al usar la opción random no te salgan. `-D <nombre de maquina>`
 - Buscar una máquina concreta por su nombre. `-n <nombre de máquina>`
+- Listar las maquinas ya hechas en la plataforma `-ld`
 
 ## Instalación
 
