@@ -49,6 +49,8 @@ parser.add_argument('-r', '--random', action='store_true', help='Máquina aleato
 parser.add_argument('-n', '--nombre', help='Buscar una máquina concreta.')
 parser.add_argument('-nb', '--no-banner', action='store_true', help='Eliminar el banner del output.')
 parser.add_argument('-D', '--Done', help='Marcar una máquina como hecha.')
+parser.add_argument('-ld', '--listar-done', action='store_true', help='Listar todas las maquinas hechas')
+
 args = parser.parse_args()
 
 url = 'http://beta.dockerlabs.es/#/'
@@ -81,6 +83,17 @@ if response.status_code == 200:
 
     maquinas_hechas = leer_maquinas_hechas()
     maquinas_por_hacer = [machine for machine in machines if machine[0] not in maquinas_hechas]
+    
+    #Listar maquinas hechas
+    if args.listar_done:
+        if maquinas_hechas:
+            print(f"{VERDE}[+] Las máquinas ya hechas son:{NORMAL}")
+            for maquina in maquinas_hechas:
+                print(f"{AZUL}Nombre:{NORMAL} {maquina.capitalize()}")
+        else:
+            print(f"{AMARILLO}[!] No hay máquinas marcadas como hechas.{NORMAL}")
+        exit()
+    #Fin Listar maquinas hechas
 
     if args.Done:
         maquina = args.Done.lower()
