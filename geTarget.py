@@ -110,7 +110,7 @@ if response.status_code == 200:
                 print()
                 for machine in filtered_machines:
                     if machine[0] in maquinas_hechas:
-                        print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}{AMARILLO} [!] Hecha!{NORMAL}")
+                        print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}{AMARILLO} [!] Pwn3d!{NORMAL}")
                     else:
                         print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}")
                     print(f"{PURPLE}Tamaño de descarga:{NORMAL} {machine[3]}")
@@ -155,7 +155,7 @@ if response.status_code == 200:
                     print()
                     for machine in filtered_machines:
                         if machine[0] in maquinas_hechas:
-                            print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()} {AMARILLO} [!] Hecha!{NORMAL}")
+                            print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()} {AMARILLO} [!] Pwn3d!{NORMAL}")
                         else:
                             print(f"{AZUL}Nombre:{NORMAL} {machine[0].capitalize()}")
                         print(f"{PURPLE}Tamaño de descarga:{NORMAL} {machine[3]}")
