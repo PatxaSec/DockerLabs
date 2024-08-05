@@ -17,7 +17,7 @@ Con esta herramienta puedes:
 - Buscar máquinas por creador. `-nc <nombre creador>`
 - Sacar una máquina aleatoria de un creador concreto. `-r` + `-nc <nombre creador>`
 - Listar máquinas ordenadas por creador. `-c`
-- Descarga de una máquina concreta usando filtros random o búsqueda por nombre y añadiendo `-w <ruta/para/descarga>`. (en desarrollo)
+- Descarga de una máquina concreta usando filtros random o búsqueda por nombre y añadiendo `-w <ruta/para/descarga>`.
 - Barra de progreso a descarga: (en desarrollo)
 
 ## Instalación
@@ -29,18 +29,18 @@ git clone https://github.com/PatxaSec/DockerLabs.git
 cd DockerLabs
 ```
 ```
-pip install -r requirements
+docker build -t <nombre_imágen> .
 ```
 
-## Uso
+## Uso  (Se recomienda crear un alias en .bashrc, .zshrc o terminal en uso.)
 
 ```
-python3 geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR]
+docker run --rm -t -e TERM=xterm  -v <directorio de descarga>:/app <nombre contenedor> python3 /app/geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w .]
 ```
 
 ## opciones
 ```
--h, --help            show this help message and exit
+ -h, --help            show this help message and exit
   -d DIFICULTAD, --dificultad DIFICULTAD
                         Filtrar por dificultad. ['Muy Fácil', 'Fácil', 'Medio', 'Difícil']
   -r, --random          Máquina aleatoria.
@@ -52,5 +52,18 @@ python3 geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [
   -c, --creador         Listar máquinas por creador.
   -nc NOMBRE_CREADOR, --nombre_creador NOMBRE_CREADOR
                         Buscar máquinas por nombre de creador.
+  -w WEB_GET, --web-get <directorio de descarga>
+                        Descargar máquina.
 
 ```
+## Ejemplos
+
+![descarga](ejemplos/descarga.png)
+
+---
+
+![nombre](ejemplos/nombre.png)
+
+---
+
+![random+medio](ejemplos/random+Medio.png)
