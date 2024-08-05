@@ -28,14 +28,15 @@ git clone https://github.com/PatxaSec/DockerLabs.git
 ```
 cd DockerLabs
 ```
-```
-pip3 install -r requirements.txt
-```
 
 ## Uso
 
 ```
-geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w WEB_GET]
+source bin/activate
+```
+
+```
+python3 geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w WEB_GET]
 ```
 
 ## opciones
@@ -52,8 +53,7 @@ geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc
   -c, --creador         Listar máquinas por creador.
   -nc NOMBRE_CREADOR, --nombre_creador NOMBRE_CREADOR
                         Buscar máquinas por nombre de creador.
-  -w WEB_GET, --web-get WEB_GET
-                        Descargar máquina.
+
 ```
 
 ## Ejemplos
