@@ -8,10 +8,10 @@ import re
 from colorama import init, Fore, Style
 import unidecode
 import os
-from mega import Mega
+#from mega import Mega
 
 init()
-m = Mega()
+#m = Mega()
 
 VERDE = Fore.GREEN
 AZUL = Fore.BLUE
@@ -173,8 +173,8 @@ def buscar_maquina_por_nombre(maquinas, nombre):
         print(f"{AZUL}Creador:{NORMAL} {found_machine[4].title()}")
         print(f"{PURPLE}Link de descarga:{NORMAL} {found_machine[2]}")
         print()
-        if args.web_get:
-            descargar_maquina(found_machine[2], args.web_get)
+#        if args.web_get:
+#            descargar_maquina(found_machine[2], args.web_get)
     else:
         if nombre.lower() in maquinas_hechas:
             print(f"{AMARILLO}[!] La máquina '{nombre}' está marcada como hecha, pero no se encuentra en la lista actual de máquinas.{NORMAL}")
@@ -213,10 +213,10 @@ def seleccionar_maquina_aleatoria(maquinas):
         print(f"{PURPLE}Link de descarga:{NORMAL} {maquinas_disponibles[2]}")
         print(f"{AZUL}Creador:{NORMAL} {maquinas_disponibles[4].title()}")
 
-def descargar_maquina(download_link, download_path):
-    print(f"{AZUL}[+] Descargando máquina desde el enlace: {download_link}{NORMAL}")
-    m.download_url(download_link, download_path)
-    print(f"{VERDE}[+] Descarga completada en {download_path}.{NORMAL}")
+#def descargar_maquina(download_link, download_path):
+#    print(f"{AZUL}[+] Descargando máquina desde el enlace: {download_link}{NORMAL}")
+#    m.download_url(download_link, download_path)
+#    print(f"{VERDE}[+] Descarga completada en {download_path}.{NORMAL}")
 
 def manejar_argumentos(args, maquinas):
     if args.dificultad:
@@ -226,8 +226,8 @@ def manejar_argumentos(args, maquinas):
             if available_machines:
                 random_machine = random.choice(available_machines)
                 imprimir_info_maquina(random_machine, args.dificultad)
-                if args.web_get:
-                    descargar_maquina(random_machine[2], args.web_get)
+#                if args.web_get:
+#                    descargar_maquina(random_machine[2], args.web_get)
             else:
                 print(f"{AMARILLO}[!] No hay máquinas de dificultad {args.dificultad} disponibles.{NORMAL}")
         else:
@@ -245,8 +245,8 @@ def manejar_argumentos(args, maquinas):
             if available_machines:
                 random_machine = random.choice(available_machines)
                 imprimir_info_maquina(random_machine, args.nombre_creador)
-                if args.web_get:
-                    descargar_maquina(random_machine[2], args.web_get)
+#                if args.web_get:
+#                    descargar_maquina(random_machine[2], args.web_get)
             else:
                 print(f"{AMARILLO}[!] No hay máquinas del creador {args.nombre_creador} disponibles.{NORMAL}")
         else:
@@ -256,8 +256,8 @@ def manejar_argumentos(args, maquinas):
         if available_machines:
             random_machine = random.choice(available_machines)
             seleccionar_maquina_aleatoria(random_machine)
-            if args.web_get:
-                descargar_maquina(random_machine[2], args.web_get)
+#            if args.web_get:
+#                descargar_maquina(random_machine[2], args.web_get)
         else:
             print(f"{AMARILLO}[!] No hay máquinas disponibles.{NORMAL}")
     elif args.creador:
@@ -301,7 +301,7 @@ if __name__=="__main__":
     parser.add_argument('-D', '--Done', help='Marcar una máquina como hecha.')
     parser.add_argument('-c', '--creador', action='store_true', help='Listar máquinas por creador.')
     parser.add_argument('-nc', '--nombre_creador', help='Buscar máquinas por nombre de creador.')
-    parser.add_argument('-w', '--web-get', help='Descargar máquina.')
+#    parser.add_argument('-w', '--web-get', help='Descargar máquina.')
     args = parser.parse_args()
     maquinas_hechas = leer_maquinas_hechas(MAQUINAS_HECHAS_FILENAME)
     docker_rows = obtener_datos()
