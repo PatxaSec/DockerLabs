@@ -32,7 +32,7 @@ cd DockerLabs
 ## Uso
 
 ```
-source bin/activate
+source scripts/activate
 ```
 
 ```
