@@ -62,7 +62,7 @@ docker run --rm -t -e TERM=xterm  -v <directorio de descarga>:/app <nombre conte
 
 ---
 
-![nombre](ejemplos/nombre.png)
+![marcar y verificar](ejemplos/marcar_hecha_y_verificar.png)
 
 ---
 
