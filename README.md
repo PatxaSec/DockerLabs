@@ -55,13 +55,3 @@ python3 geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [
                         Buscar máquinas por nombre de creador.
 
 ```
-
-## Ejemplos
-
-![descarga](ejemplos/descarga.png)
-![Dificultad](ejemplos/dificultad.png)
-![Nombre](ejemplos/nombre.png)
-
----
-
-[Todos los Ejemplos](ejemplos)
