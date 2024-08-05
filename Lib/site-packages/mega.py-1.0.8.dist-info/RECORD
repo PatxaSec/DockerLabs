@@ -1,0 +1,15 @@
+mega.py-1.0.8.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+mega.py-1.0.8.dist-info/LICENSE,sha256=7pwMzSj4eHxmoiOGCWso1--J6I_FmzbshJow83BYiYg,11344
+mega.py-1.0.8.dist-info/METADATA,sha256=1hHugrkx0p4VTw4jULgEx9J7ue-mAUN4-cUtM-6RjmU,6462
+mega.py-1.0.8.dist-info/RECORD,,
+mega.py-1.0.8.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+mega.py-1.0.8.dist-info/WHEEL,sha256=kGT74LWyRUZrL4VgLh6_g12IeVl_9u9ZVhadrgXZUEY,110
+mega.py-1.0.8.dist-info/top_level.txt,sha256=N63gTomQgQ67WZl1LTgIZHFjjpSgzLlCdfe3xdMt7eQ,5
+mega/__init__.py,sha256=hFC4Z28L6FneJXH39ZpwEQyVVBBGYUPec7TvTRTW9Q4,31
+mega/__pycache__/__init__.cpython-310.pyc,,
+mega/__pycache__/crypto.cpython-310.pyc,,
+mega/__pycache__/errors.cpython-310.pyc,,
+mega/__pycache__/mega.cpython-310.pyc,,
+mega/crypto.py,sha256=aBwKl6giDw-_H8034W81rdD-h9A8wPhfzLbskDPORtM,4019
+mega/errors.py,sha256=jEd_nNijLkK2CWhXQNQrm_J-zAAL-kYH3qcfcklNj8w,2523
+mega/mega.py,sha256=NdQz5-4p-eGkQOQZi07Wfgk2zvtsg0Y8tRFq5byZ_FQ,38332

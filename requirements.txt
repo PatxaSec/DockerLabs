@@ -1,0 +1,6 @@
+argparse
+requests
+beautifulsoup4
+colorama
+unidecode
+mega.py
