@@ -17,7 +17,7 @@ Con esta herramienta puedes:
 - Buscar máquinas por creador. `-nc <nombre creador>`
 - Sacar una máquina aleatoria de un creador concreto. `-r` + `-nc <nombre creador>`
 - Listar máquinas ordenadas por creador. `-c`
-- Descarga de una máquina concreta usando filtros random o búsqueda por nombre y añadiendo `-w <ruta/para/descarga>`. (en desarrollo por problemas técnicos)
+- Descarga de una máquina concreta usando filtros random o búsqueda por nombre y añadiendo `-w <ruta/para/descarga>`. (en desarrollo)
 - Barra de progreso a descarga: (en desarrollo)
 
 ## Instalación
@@ -28,15 +28,14 @@ git clone https://github.com/PatxaSec/DockerLabs.git
 ```
 cd DockerLabs
 ```
+```
+pip install -r requirements
+```
 
 ## Uso
 
 ```
-source scripts/activate
-```
-
-```
-python3 geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w WEB_GET]
+python3 geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR]
 ```
 
 ## opciones
