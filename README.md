@@ -23,7 +23,7 @@ Con esta herramienta puedes:
 - Descarga de una máquina concreta usando filtros random o búsqueda por nombre y añadiendo `-w <ruta/para/descarga>`. (con v3.10 de Python no hace falta usar Docker)
 - Barra de progreso a descarga: (en desarrollo)
 
-## Instalación (solo necesario para version > 3.10 de Python)
+## Instalación (solo necesario para version < 3.10 de Python)
 
 ```
 git clone https://github.com/PatxaSec/DockerLabs.git
