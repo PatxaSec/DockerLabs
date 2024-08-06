@@ -35,7 +35,7 @@ docker build -t <nombre_imágen> .
 ## Uso  (Se recomienda crear un alias en .bashrc, .zshrc o terminal en uso.)
 
 ```
-docker run --rm -t -e TERM=xterm  -v <directorio de descarga>:/app <nombre imágen> python3 /app/geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w .]
+docker run --rm -t -e TERM=xterm --mount type=bind,src=<directorio/descarga>,dst=/app/host <nombre imagen> python3 /app/geTarget.py  [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w .]
 ```
 
 ## opciones
