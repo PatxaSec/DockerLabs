@@ -22,7 +22,7 @@ pip3 install -r requirements.txt
 
 ---
 
-# seeTarget.py
+# seeTarget.py (Desarrolado en ![Python](https://img.shields.io/badge/python-3.11.9-3670A0?style=flat&logo=python&logoColor=ffdd54))
 
 ![Python](https://img.shields.io/badge/python-3.7_|_3.8_|_3.9_|_3.10_|_3.11_|_3.12-3670A0?style=flat&logo=python&logoColor=ffdd54)
 
@@ -64,7 +64,7 @@ seeTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-n
 
 
 ---
-# geTarget.py
+# geTarget.py  (Desarrolado en ![Python](https://img.shields.io/badge/python-3.10.12-3670A0?style=flat&logo=python&logoColor=ffdd54))
 
 ![Python](https://img.shields.io/badge/python-3.8_|_3.9_|_3.10-3670A0?style=flat&logo=python&logoColor=ffdd54)
 
