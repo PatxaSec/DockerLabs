@@ -5,7 +5,7 @@ Plataforma creada por [@elpingüinodemario](https://github.com/Maalfer), y a qui
 - v2.0
 
 - descarga en periodo de prueba
-- seeTarget.py no tiene opción a descarga por las resticciones de versiones que hay, y para facilitar una versión 100% funcional.
+- seeTarget.py no tiene opción `-w` para descargar máquinas. Está incluída por las resticciones de versiones que hay para `-w`, y para facilitar una versión 100% funcional que no requiera de docker.
 
 Herramienta que mediante el scrapping de la web, permite obtener diferentes resultados.
 
