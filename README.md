@@ -1,13 +1,61 @@
-Dockerlabs es una plataforma de CTF con las máquinas creadas en docker. Fácil de iniciar, con gasto bajo de recursos, y facil de borrar.
-Plataforma creada por [@elpingüinodemario](https://github.com/Maalfer), y a quien tenemos que agradecer su pasión y esfuerzo.
+
+# DOCKERLABS CLI
+
+Dockerlabs es una plataforma de CTF con las máquinas creadas en docker. Fácil de iniciar, con gasto bajo de recursos, y facil de borrar. Plataforma creada por [@elpingüinodemario](https://github.com/Maalfer), y a quien tenemos que agradecer su pasión y esfuerzo.
 
 # DockerLabs CLI
 - v2.0
 
-- descarga en periodo de prueba
-- seeTarget.py no tiene opción `-w` para descargar máquinas. Está incluída por las resticciones de versiones que hay para `-w`, y para facilitar una versión 100% funcional que no requiera de docker.
 
-Herramienta que mediante el scrapping de la web, permite obtener diferentes resultados.
+## Instalación
+
+```
+git clone https://github.com/PatxaSec/DockerLabs.git
+```
+```
+cd DockerLabs
+```
+```
+pip3 install -r requirements.txt 
+```
+
+
+---
+
+# seeTarget.py
+
+![Python](https://img.shields.io/badge/python-3.7_|_3.8_|_3.9_|_3.10_|_3.11_|_3.12-3670A0?style=flat&logo=python&logoColor=ffdd54)
+
+## Uso
+
+```
+seeTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR]
+```
+
+## opciones
+```
+ -h, --help            show this help message and exit
+  -d DIFICULTAD, --dificultad DIFICULTAD
+                        Filtrar por dificultad. ['Muy Fácil', 'Fácil', 'Medio', 'Difícil']
+  -r, --random          Máquina aleatoria.
+  -n NOMBRE, --nombre NOMBRE
+                        Buscar una máquina concreta.
+  -p, --pwn3d           Listar todas las maquinas marcadas como hechas
+  -nb, --no-banner      Eliminar el banner del output.
+  -D DONE, --Done DONE  Marcar una máquina como hecha.
+  -c, --creador         Listar máquinas por creador.
+  -nc NOMBRE_CREADOR, --nombre_creador NOMBRE_CREADOR
+                        Buscar máquinas por nombre de creador.
+
+```
+
+
+
+---
+# geTarget.py
+
+![Python](https://img.shields.io/badge/python-3.8_|_3.9_|_3.10-3670A0?style=flat&logo=python&logoColor=ffdd54)
+
 
 Con esta herramienta puedes:
 - Listar, ordenadas por dificultad, todas la máquinas disponibles junto con la memoria de descarga y su link.
@@ -20,32 +68,10 @@ Con esta herramienta puedes:
 - Buscar máquinas por creador. `-nc <nombre creador>`
 - Sacar una máquina aleatoria de un creador concreto. `-r` + `-nc <nombre creador>`
 - Listar máquinas ordenadas por creador. `-c`
-- Descarga de una máquina concreta usando filtros random o búsqueda por nombre y añadiendo `-w <ruta/para/descarga>`. (con v3.10 de Python no hace falta usar Docker)
+- Descarga de una máquina concreta usando filtros random o búsqueda por nombre y añadiendo `-w <ruta/para/descarga>`. 
 - Barra de progreso a descarga: (en desarrollo)
 
-## Instalación (solo necesario para version < 3.10 de Python)
-
-```
-git clone https://github.com/PatxaSec/DockerLabs.git
-```
-```
-cd DockerLabs
-```
-```
-# sin docker
-pip3 install -r requirements
-# para docker
-docker build -t <nombre_imágen> . 
-```
-
-## Uso Docker (Se recomienda crear un alias en .bashrc, .zshrc o terminal en uso.)
-
-```
-docker run --rm -t -e TERM=xterm --mount type=bind,src=./,dst=/app/host <nombre_imágen> python3 /app/geTarget.py  [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w .]
-o
-docker run --rm -t -e TERM=xterm  -v <ruta/para/descarga>:/app <nombre_imágen> python3 /app/geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w .]
-```
-## Uso NO-Docker
+## Uso
 
 ```
 geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w WEB_GET]
@@ -69,7 +95,9 @@ geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc
                         Descargar máquina.
 
 ```
-## Ejemplos
+---
+
+# Ejemplos
 
 ![descarga](ejemplos/descarga.png)
 
