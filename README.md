@@ -26,6 +26,18 @@ pip3 install -r requirements.txt
 
 ![Python](https://img.shields.io/badge/python-3.7_|_3.8_|_3.9_|_3.10_|_3.11_|_3.12-3670A0?style=flat&logo=python&logoColor=ffdd54)
 
+Con este script puedes:
+- Listar, ordenadas por dificultad, todas la máquinas disponibles junto con la memoria de descarga y su link.
+- Listar Filtradas por la dificultad que escojas todas las máquinas disponibles en esa dificultad. `-d <dificultad>`
+- Sacar una máquina aleatoria del listado completo. `-r`
+- Sacar una máquina aleatoria de una dificultad concreta. `-r`+`-d <dificultad>`
+- Guardar las máquinas ya hechas para que el output te avise, y al usar la opción random no te salgan. `-D <nombre de maquina>`
+- Listar todas las maquinas ya hechas ordenadas por Dificultad. `-p`
+- Buscar una máquina concreta por su nombre. `-n <nombre de máquina>`
+- Buscar máquinas por creador. `-nc <nombre creador>`
+- Sacar una máquina aleatoria de un creador concreto. `-r` + `-nc <nombre creador>`
+- Listar máquinas ordenadas por creador. `-c`
+
 ## Uso
 
 ```
@@ -57,7 +69,7 @@ seeTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-n
 ![Python](https://img.shields.io/badge/python-3.8_|_3.9_|_3.10-3670A0?style=flat&logo=python&logoColor=ffdd54)
 
 
-Con esta herramienta puedes:
+Con este script puedes:
 - Listar, ordenadas por dificultad, todas la máquinas disponibles junto con la memoria de descarga y su link.
 - Listar Filtradas por la dificultad que escojas todas las máquinas disponibles en esa dificultad. `-d <dificultad>`
 - Sacar una máquina aleatoria del listado completo. `-r`
