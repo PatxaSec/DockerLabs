@@ -4,6 +4,8 @@ Plataforma creada por [@elpingüinodemario](https://github.com/Maalfer), y a qui
 # DockerLabs CLI
 - v2.0
 
+# descarga en periodo de prueba
+
 Herramienta que mediante el scrapping de la web, permite obtener diferentes resultados.
 
 Con esta herramienta puedes:
@@ -17,10 +19,10 @@ Con esta herramienta puedes:
 - Buscar máquinas por creador. `-nc <nombre creador>`
 - Sacar una máquina aleatoria de un creador concreto. `-r` + `-nc <nombre creador>`
 - Listar máquinas ordenadas por creador. `-c`
-- Descarga de una máquina concreta usando filtros random o búsqueda por nombre y añadiendo `-w <ruta/para/descarga>`.
+- Descarga de una máquina concreta usando filtros random o búsqueda por nombre y añadiendo `-w <ruta/para/descarga>`. (con v3.10 de Python no hace falta usar Docker)
 - Barra de progreso a descarga: (en desarrollo)
 
-## Instalación
+## Instalación (solo necesario para version > 3.10 de Python)
 
 ```
 git clone https://github.com/PatxaSec/DockerLabs.git
@@ -29,13 +31,18 @@ git clone https://github.com/PatxaSec/DockerLabs.git
 cd DockerLabs
 ```
 ```
-docker build -t <nombre_imágen> .
+# sin docker
+pip3 install -r requirements
+# para docker
+docker build -t <nombre_imágen> . 
 ```
 
 ## Uso  (Se recomienda crear un alias en .bashrc, .zshrc o terminal en uso.)
 
 ```
-docker run --rm -t -e TERM=xterm --mount type=bind,src=<directorio/descarga>,dst=/app/host <nombre imagen> python3 /app/geTarget.py  [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w .]
+docker run --rm -t -e TERM=xterm --mount type=bind,src=./,dst=/app/host <nombre_imágen> python3 /app/geTarget.py  [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w .]
+o
+docker run --rm -t -e TERM=xterm  -v <ruta/para/descarga>:/app <nombre_imágen> python3 /app/geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [-w .]
 ```
 
 ## opciones
