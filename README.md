@@ -66,9 +66,9 @@ seeTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-n
 
 
 ---
-# geTarget.py  (Desarrolado en ![Python](https://img.shields.io/badge/python-3.10.12_slim-3670A0?style=flat&logo=python&logoColor=ffdd54))
+# geTarget.py  (Desarrolado en ![Python](https://img.shields.io/badge/python-3.10.12-3670A0?style=flat&logo=python&logoColor=ffdd54))
 
-probado en:   ![Python](https://img.shields.io/badge/python-3.10.12_slim-3670A0?style=flat&logo=python&logoColor=ffdd54)
+probado en:   ![Python](https://img.shields.io/badge/python-3.10.12-3670A0?style=flat&logo=python&logoColor=ffdd54)
 
 Con este script puedes:
 - Listar, ordenadas por dificultad, todas la máquinas disponibles junto con la memoria de descarga y su link.
