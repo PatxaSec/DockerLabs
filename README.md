@@ -37,11 +37,12 @@ Con este script puedes:
 - Buscar máquinas por creador. `-nc <nombre creador>`
 - Sacar una máquina aleatoria de un creador concreto. `-r` + `-nc <nombre creador>`
 - Listar máquinas ordenadas por creador. `-c`
+- eliminar el color del output. `--no-colors`
 
 ## Uso
 
 ```
-seeTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR]
+seeTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [--no-colors]
 ```
 
 ## opciones
@@ -58,6 +59,7 @@ seeTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-n
   -c, --creador         Listar máquinas por creador.
   -nc NOMBRE_CREADOR, --nombre_creador NOMBRE_CREADOR
                         Buscar máquinas por nombre de creador.
+  --no-colors           Eliminar colores del output.
 
 ```
 
