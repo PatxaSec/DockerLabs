@@ -242,7 +242,6 @@ def manejar_argumentos(args, maquinas):
             else:
                 print(f"{AMARILLO}No hay máquinas de dificultad {args.dificultad} disponibles.{NORMAL}")
         else:
-            print(f"{VERDE}La máquina de dificultad {maquinas[1].title()} que te ha tocado es:{NORMAL}")
             listar_maquinas(maquinas, [args.dificultad.lower()])
     elif args.Done:
         marcar_maquina_hecha(args.Done.lower())
