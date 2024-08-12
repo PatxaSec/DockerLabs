@@ -66,9 +66,28 @@ seeTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-n
 # Ejemplos
 
 ---
+- Filtrado por creador y dificultad.
 
-![marcar y verificar](ejemplos/marcar_hecha_y_verificar.png)
+```
+geTarget.py -nc 'el pinguino de mario' -d facil
+```
+
+![creador y dificultad](ejemplos/creador_y_dificultad.png)
 
 ---
+- Búsqueda por nombre de máquina.
 
-![random+medio](ejemplos/random+Medio.png)
+```
+geTarget.py -n cachopo
+```
+
+![nombre](ejemplos/nombre.png)
+
+---
+- Sacar una máquina aleatoria filtrando por dificultad.
+
+```
+geTarget.py -d facil -r
+```
+
+![random y dificultad](ejemplos/random_por_dificultad.png)
