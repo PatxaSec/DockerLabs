@@ -255,6 +255,7 @@ def manejar_argumentos(args, maquinas):
             available_machines = [machine for machine in filtered_machines if machine[0] not in maquinas_hechas]
             if available_machines:
                 random_machine = random.choice(available_machines)
+                print(f"{VERDE}La máquina de dificultad {random_machine[1].title()} que te ha tocado creada por {args.nombre_creador.title()} es:{NORMAL}")
                 imprimir_info_maquina(random_machine, args.nombre_creador)
             else:
                 print(f"{AMARILLO}No hay máquinas del creador {args.nombre_creador} disponibles.{NORMAL}")
