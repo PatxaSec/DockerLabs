@@ -42,7 +42,7 @@ Con este script puedes:
 ## Uso
 
 ```
-seeTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [--no-colors]
+geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [--no-colors]
 ```
 
 ## opciones
