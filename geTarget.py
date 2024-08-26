@@ -60,32 +60,32 @@ def obtener_datos():
 
 def procesar_maquinas(docker_rows):
     def obtener_elemento_onclick(text, index):
+        if text is None:
+            return 'N/A'
         try:
             elementos = text.split('(')[1].split(')')[0].split(',')
             return elementos[index].strip().strip("'").strip('"')
-        except IndexError:
+        except (IndexError, AttributeError):
             return 'N/A'
     machines = []
     for row in docker_rows:
         name = row.find("span").find("strong")
         difficulty = row.find("span", class_="badge")
         size = row.find("span", class_="size").find("strong")
-        download = row.find("button", class_="download").attrs.get("onclick")
+        download = row.find("button", class_="download")
+        download_onclick = download.attrs.get("onclick") if download else None
         onclick_text = row.attrs.get('onclick')
         creador_text = 'N/A'
         if onclick_text:
             creador_text = unidecode.unidecode(obtener_elemento_onclick(onclick_text, 3))
-        if creador_text == 'N/A':
-            onclick_text = name.attrs.get('onclick') if name else None
+        if creador_text == 'N/A' and name:
+            onclick_text = name.attrs.get('onclick')
             creador_text = unidecode.unidecode(obtener_elemento_onclick(onclick_text, 3))
-
         name_text = name.get_text(strip=True) if name else 'N/A'
         difficulty_text = unidecode.unidecode(difficulty.get_text(strip=True)) if difficulty else 'N/A'
         size_text = size.get_text(strip=True) if size else 'N/A'
-        download_text = re.search(r"'([^']+)'", download).group(1) if download else 'N/A'
-
+        download_text = re.search(r"'([^']+)'", download_onclick).group(1) if download_onclick else 'N/A'
         machines.append((name_text.lower(), difficulty_text.lower(), download_text, size_text, creador_text.lower()))
-
     return machines
 
 def imprimir_banner():
