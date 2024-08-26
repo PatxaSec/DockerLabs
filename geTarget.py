@@ -162,6 +162,95 @@ def listar_maquinas_hechas(maquinas, maquinas_hechas):
             print(f'Nº de máquinas hechas de dificultad {dif.title()}: {contador_por_dificultad[dif]}')
             print()
 
+def listar_maquinas_pendientes(maquinas, maquinas_hechas):
+    maquinas_por_dificultad = {dif: [] for dif in DIFICULTADES}
+    contador_por_dificultad = {dif: 0 for dif in DIFICULTADES}
+    for machine in maquinas:
+        if machine[0] not in maquinas_hechas:
+            maquinas_por_dificultad[machine[1]].append(machine)
+            contador_por_dificultad[machine[1]] += 1
+    for dif, machines in maquinas_por_dificultad.items():
+        if machines:
+            print()
+            print(f"{VERDE}{dif.title()}{NORMAL}\n")
+            for machine in machines:
+                print(f"{AZUL}Nombre:{NORMAL} {machine[0].title()}")
+                print(f"{PURPLE}Tamaño de descarga:{NORMAL} {machine[3]}")
+                print(f"{PURPLE}Link de descarga:{NORMAL} {machine[2]}")
+                print(f"{AZUL}Creador:{NORMAL} {machine[4].title()}")
+                print()
+            print(f'Nº de máquinas pendientes de dificultad {dif.title()}: {contador_por_dificultad[dif]}')
+            print()
+
+def mostrar_estadisticas(maquinas, maquinas_hechas):
+    total_maquinas = len(maquinas)
+    total_hechas = len(maquinas_hechas)
+    total_pendientes = total_maquinas - total_hechas
+
+    maquinas_por_dificultad = {dif: 0 for dif in DIFICULTADES}
+    hechas_por_dificultad = {dif: 0 for dif in DIFICULTADES}
+    maquinas_por_creador = {}
+    maquinas_hechas_por_creador = {}
+
+    for maquina in maquinas:
+        nombre, dificultad, download_text, size_text, creador = maquina
+        maquinas_por_dificultad[dificultad] += 1
+
+        if creador not in maquinas_por_creador:
+            maquinas_por_creador[creador] = 0
+            maquinas_hechas_por_creador[creador] = 0
+        maquinas_por_creador[creador] += 1
+
+        if nombre in maquinas_hechas:
+            hechas_por_dificultad[dificultad] += 1
+            maquinas_hechas_por_creador[creador] += 1
+
+    print(f"\n{VERDE}Estadísticas generales:{NORMAL}\n")
+    print(f"{AZUL}Total de máquinas disponibles:{NORMAL} {total_maquinas}")
+    print(f"{AZUL}Total de máquinas hechas:{NORMAL} {total_hechas}")
+    print(f"{AZUL}Total de máquinas pendientes:{NORMAL} {total_pendientes}\n")
+
+    print(f"\n{VERDE}Por creador:{NORMAL}\n")
+    barra_ancho = 40  
+    ancho_nombre = 20  
+
+    def truncar_nombre(nombre, ancho_maximo):
+        if len(nombre) > ancho_maximo:
+            return nombre[:ancho_maximo - 3] + '...'
+        return nombre
+
+    for creador, total in maquinas_por_creador.items():
+        realizadas = maquinas_hechas_por_creador[creador]
+        porcentaje = (realizadas / total) * 100
+        barra_completada = int((realizadas / total) * barra_ancho)
+        barra_pendiente = barra_ancho - barra_completada
+
+        bar_completed = f"{VERDE}{'█' * barra_completada}{NORMAL}"
+        bar_pending = f"{PURPLE}{'░' * barra_pendiente}{NORMAL}"
+
+        nombre_truncado = truncar_nombre(creador.title(), ancho_nombre)
+        print(f"{nombre_truncado:<{ancho_nombre}} {bar_completed}{bar_pending} {realizadas}/{total} ({porcentaje:.2f}%)")
+
+    print(f"\n{VERDE}Por dificultad:{NORMAL}\n")
+    ancho_dificultad = 15  
+
+    for dif in DIFICULTADES:
+        total = maquinas_por_dificultad[dif]
+        hechas = hechas_por_dificultad[dif]
+
+        barra_completada = int((hechas / total) * barra_ancho) if total > 0 else 0
+        barra_pendiente = barra_ancho - barra_completada
+
+        bar_completed = f"{VERDE}{'█' * barra_completada}{NORMAL}"
+        bar_pending = f"{PURPLE}{'░' * barra_pendiente}{NORMAL}"
+
+        dificultad_truncada = truncar_nombre(dif.title(), ancho_dificultad)
+        print(f"{dificultad_truncada:<{ancho_dificultad}} {bar_completed}{bar_pending} {hechas}/{total} ({(hechas / total) * 100:.2f}% Hechas)")
+
+    dificultad_fav = max(hechas_por_dificultad, key=hechas_por_dificultad.get)
+    print(f"\n{VERDE}Dificultad más realizada:{NORMAL} {dificultad_fav.title()}\n")
+
+
 def buscar_maquina_por_nombre(maquinas, nombre):
     found_machine = next((machine for machine in maquinas if machine[0] == nombre.lower()), None)
     if found_machine:
@@ -247,6 +336,10 @@ def manejar_argumentos(args, maquinas):
         marcar_maquina_hecha(args.Done.lower())
     elif args.pwn3d:
         listar_maquinas_hechas(maquinas, maquinas_hechas)
+    elif args.no_pwn3d:
+        listar_maquinas_pendientes(maquinas, maquinas_hechas)
+    elif args.estadisticas:
+        mostrar_estadisticas(maquinas, maquinas_hechas)
     elif args.nombre:
         buscar_maquina_por_nombre(maquinas, args.nombre.lower())
     elif args.nombre_creador:
@@ -313,6 +406,8 @@ if __name__=="__main__":
     parser.add_argument('-r', '--random', action='store_true', help='Máquina aleatoria.')
     parser.add_argument('-n', '--nombre', help='Buscar una máquina concreta.')
     parser.add_argument('-p', '--pwn3d', action='store_true', help='Listar todas las maquinas marcadas como hechas')
+    parser.add_argument('-np', '--no-pwn3d', action='store_true', help='Listar todas las maquinas pendientes')
+    parser.add_argument("-s", "--estadisticas" , action="store_true", help="Muestra estadísticas de las máquinas.")
     parser.add_argument('-nb', '--no-banner', action='store_true', help='Eliminar el banner del output.')
     parser.add_argument('-D', '--Done', help='Marcar una máquina como hecha.')
     parser.add_argument('-c', '--creador', action='store_true', help='Listar máquinas por creador.')
