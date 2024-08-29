@@ -227,7 +227,7 @@ def seleccionar_maquina_aleatoria(maquinas):
 
 def manejar_argumentos(args, maquinas, ultima):
     if args.updates:
-        differences = list(set(maquinas) ^ set(ultima))
+        differences = [maquina for maquina in maquinas if maquina not in ultima]
         listar_maquinas(differences)
     elif args.dificultad:
         filtered_machines = [machine for machine in maquinas if machine[1] == args.dificultad.lower()]
