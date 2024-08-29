@@ -18,6 +18,7 @@ AMARILLO = Fore.YELLOW
 ROJO = Fore.RED
 NORMAL = Style.RESET_ALL
 MAQUINAS_HECHAS_FILENAME = "maquinas_hechas.txt"
+ULTIMA_EJECUCION_FILENAME = "ultima_ejecucion.txt"
 URL = 'https://dockerlabs.es'
 
 BANNERS = [
@@ -50,6 +51,16 @@ def escribir_maquina_hecha(filename, maquina):
     with open(filename, "a") as file:
         file.write(maquina.lower() + "\n")
 
+def leer_ultima_ejecucion(filename):
+    if not os.path.exists(filename):
+        return set()
+    with open(filename, "r") as file:
+        return [tuple(line.strip().split(',')) for line in file.readlines()]
+
+def escribir_ultima_ejecucion(filename, maquinas):
+    with open(filename, "w") as file:
+        file.write('\n'.join([','.join(map(str, maquina)) for maquina in maquinas]))
+        
 def obtener_datos():
     response = requests.get(URL)
     if response.status_code != 200:
@@ -214,8 +225,11 @@ def seleccionar_maquina_aleatoria(maquinas):
         print(f"{PURPLE}Link de descarga:{NORMAL} {maquinas_disponibles[2]}")
         print(f"{AZUL}Creador:{NORMAL} {maquinas_disponibles[4].title()}")
 
-def manejar_argumentos(args, maquinas):
-    if args.dificultad:
+def manejar_argumentos(args, maquinas, ultima):
+    if args.updates:
+        differences = list(set(maquinas) ^ set(ultima))
+        listar_maquinas(differences)
+    elif args.dificultad:
         filtered_machines = [machine for machine in maquinas if machine[1] == args.dificultad.lower()]
         if args.nombre_creador:
             filtered_machines = [machine for machine in maquinas if machine[1] == args.dificultad.lower() and machine[4] == args.nombre_creador.lower()]
@@ -310,6 +324,7 @@ def marcar_maquina_hecha(maquina):
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description='Busca tu máquina de Dockerlabs.')
     parser.add_argument('-d', '--dificultad', help="Filtrar por dificultad. ['Muy Fácil', 'Fácil', 'Medio', 'Difícil']")
+    parser.add_argument('-u', '--updates', action='store_true', help="Mostrar novedades")
     parser.add_argument('-r', '--random', action='store_true', help='Máquina aleatoria.')
     parser.add_argument('-n', '--nombre', help='Buscar una máquina concreta.')
     parser.add_argument('-p', '--pwn3d', action='store_true', help='Listar todas las maquinas marcadas como hechas')
@@ -323,10 +338,12 @@ if __name__=="__main__":
     docker_rows = obtener_datos()
     if docker_rows:
         maquinas = procesar_maquinas(docker_rows)
+        ultima = leer_ultima_ejecucion(ULTIMA_EJECUCION_FILENAME)
+        escribir_ultima_ejecucion(ULTIMA_EJECUCION_FILENAME, maquinas)
         maquinas_por_hacer = [machine for machine in maquinas if machine[0] not in maquinas_hechas]
         if args.no_colors:
             quitar_colores()
         if not args.no_banner:
             imprimir_banner()
-        manejar_argumentos(args, maquinas)
+        manejar_argumentos(args, maquinas, ultima)
     print(f"Agradecimientos a {AZUL}@elpingüinodemario{NORMAL} por crear {PURPLE}{URL}{NORMAL} y darnos otra forma de jugar.")
