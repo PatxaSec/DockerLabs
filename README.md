@@ -4,9 +4,11 @@
 Dockerlabs es una plataforma de CTF con las máquinas creadas en docker. Fácil de iniciar, con gasto bajo de recursos, y facil de borrar. Plataforma creada por [@elpingüinodemario](https://github.com/Maalfer), y a quien tenemos que agradecer su pasión y esfuerzo.
 
 # DockerLabs CLI
-- v2.0
-
-
+- v2.5
+    ### Añadido:
+    - Modificado el output.
+    - Opción a listar las máquinas que faltan por hacer.
+    - Descarga de las máquinas.
 ## Instalación
 
 ```
@@ -18,7 +20,30 @@ cd DockerLabs
 ```
 pip3 install -r requirements.txt 
 ```
+#### DISCLAIMER !!
 
+Para que la funcionalidad de descarga de las maquinas funcione, es necesario descargar [geckodriver](https://github.com/mozilla/geckodriver). En caso de no descargarse, esa funcionalidad no existirá, pero tampoco evitara el uso de la herramienta.
+La descarga la puedes realizar de forma manual con los siguientes comandos, o ejecutando el script [install_driver.sh](./install_driver.sh)
+
+```
+curl -L https://github.com/mozilla/geckodriver/releases/download/v0.35.0/geckodriver-v0.35.0-linux64.tar.gz -o geckodriver.tar.gz
+```
+
+```
+tar -xzf geckodriver.tar.gz
+```
+
+```
+chmod +x geckodriver
+```
+
+```
+sudo mv geckodriver /usr/bin
+```
+
+```
+echo "export PATH=\$PATH:/usr/bin/geckodriver" >> ~/.profile
+```
 
 ---
 
@@ -38,32 +63,46 @@ Con este script puedes:
 - Sacar una máquina aleatoria de un creador concreto. `-r` + `-nc <nombre creador>`
 - Listar máquinas ordenadas por creador. `-c`
 - eliminar el color del output. `--no-colors`
+- Listar máquinas no marcadas como Pwn3d: `-np`
+- Descargar máquina concreta, buscandola por nombre o una aleatoria. `-r -w`, `-n <nombre> -w`, `-nc <mombre_creador> -r -w ` o `-d <dificultad> -r -w` (Necesario geckodriver)
 
 ## Uso
 
 ```
-geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [--no-colors]
+geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-np] [-nb] [-D DONE] [-c] [-nc NOMBRE_CREADOR] [--no-colors] [-w]
 ```
 
 ## opciones
 ```
- -h, --help            show this help message and exit
+  -h, --help            show this help message and exit
   -d DIFICULTAD, --dificultad DIFICULTAD
                         Filtrar por dificultad. ['Muy Fácil', 'Fácil', 'Medio', 'Difícil']
   -r, --random          Máquina aleatoria.
   -n NOMBRE, --nombre NOMBRE
                         Buscar una máquina concreta.
   -p, --pwn3d           Listar todas las maquinas marcadas como hechas
+  -np, --no-pwn3d       Listar todas las maquinas no marcadas como hechas
   -nb, --no-banner      Eliminar el banner del output.
   -D DONE, --Done DONE  Marcar una máquina como hecha.
   -c, --creador         Listar máquinas por creador.
   -nc NOMBRE_CREADOR, --nombre_creador NOMBRE_CREADOR
                         Buscar máquinas por nombre de creador.
   --no-colors           Eliminar colores del output.
+  -w, --wget            Descargar máquina random o buscada por nombre
 
 ```
 
 # Ejemplos
+
+---
+- Descarga de máquina.
+
+```
+geTarget.py -d facil -r -w
+```
+
+![descarga](ejemplos/descarga.png)
+
 
 ---
 - Filtrado por creador y dificultad.
