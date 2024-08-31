@@ -45,6 +45,10 @@ sudo mv geckodriver /usr/bin
 echo "export PATH=\$PATH:/usr/bin/geckodriver" >> ~/.profile
 ```
 
+```
+source ~/.profile
+```
+
 ---
 
 # geTarget.py (Desarrollado en ![Python](https://img.shields.io/badge/python-3.11.9-3670A0?style=flat&logo=python&logoColor=ffdd54))
