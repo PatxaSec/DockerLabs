@@ -3,3 +3,4 @@ requests
 beautifulsoup4
 colorama
 unidecode
+selenium==4.5.0
