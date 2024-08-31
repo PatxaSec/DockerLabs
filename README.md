@@ -4,7 +4,7 @@
 Dockerlabs es una plataforma de CTF con las máquinas creadas en docker. Fácil de iniciar, con gasto bajo de recursos, y facil de borrar. Plataforma creada por [@elpingüinodemario](https://github.com/Maalfer), y a quien tenemos que agradecer su pasión y esfuerzo.
 
 # DockerLabs CLI
-- v2.5
+- v2.5 (Fase de testing)
     ### Añadido:
     - Modificado el output.
     - Opción a listar las máquinas que faltan por hacer.
