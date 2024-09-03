@@ -255,7 +255,7 @@ def descargar_maquinas(url, nombre):
                 dato = file.read().strip()
                 return dato
         else:
-             print(f'{VERDE}Bienvenido a la descarga de máquinas desde Dockerlabs CLI.{NORMAL}')
+            print(f'{VERDE}Bienvenido a la descarga de máquinas desde Dockerlabs CLI.{NORMAL}')
             print(f'{AMARILLO}Este paso solo tendrás que hacerlo esta vez.{NORMAL}')
             dato = input(f"{AZUL}Introduce el path completo del binario de Firefox [Ejemplo: /usr/bin/firefox]:{NORMAL} ")
             with open(file_path, "w") as file:
