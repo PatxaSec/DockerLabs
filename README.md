@@ -6,7 +6,7 @@ PARA SU USO RECOMENDAMOS **KALI LINUX**.
 Dockerlabs es una plataforma de CTF con las máquinas creadas en docker. Fácil de iniciar, con gasto bajo de recursos, y facil de borrar. Plataforma creada por [@elpingüinodemario](https://github.com/Maalfer), y a quien tenemos que agradecer su pasión y esfuerzo.
 
 # DockerLabs CLI
-- v2.5 (Fase de testing)
+- v2.5
     ### Añadido:
     - Modificado el output.
     - Opción a listar las máquinas que faltan por hacer.
@@ -24,32 +24,52 @@ pip3 install -r requirements.txt
 ```
 #### DISCLAIMER !!
 
-Para que la funcionalidad de descarga de las maquinas funcione, es necesario descargar [geckodriver](https://github.com/mozilla/geckodriver). En caso de no descargarse, esa funcionalidad no existirá, pero tampoco evitara el uso de la herramienta.
+Para que la funcionalidad de descarga de las maquinas funcione, es necesario descargar [geckodriver](https://github.com/mozilla/geckodriver). En caso de no descargarse, esa funcionalidad no existirá, pero la herramienta se podrá usar con el resto de sus funcionalidades.
+
 La descarga la puedes realizar de forma manual con los siguientes comandos, o ejecutando el script [install_driver.sh](./install_driver.sh)
+
+- Descargar.
 
 ```
 curl -L https://github.com/mozilla/geckodriver/releases/download/v0.35.0/geckodriver-v0.35.0-linux64.tar.gz -o geckodriver.tar.gz
 ```
 
+- Descomprimir.
+
+
 ```
 tar -xzf geckodriver.tar.gz
 ```
+
+Dar Permisos.
+
 
 ```
 chmod +x geckodriver
 ```
 
+- Mover a bin
+
+
 ```
 sudo mv geckodriver /usr/bin
 ```
+
+Exportar al path.
+
 
 ```
 echo "export PATH=\$PATH:/usr/bin/geckodriver" >> ~/.profile
 ```
 
+- Recargar perfil.
+
+
 ```
 source ~/.profile
 ```
+
+- Recargar la terminal.
 
 ---
 
