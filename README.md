@@ -122,11 +122,13 @@ geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-np] [-nb] [-D DONE] [-c
 ---
 - Descarga de máquina.
 
+[Video de ejemplo de Descarga.](ejemplos/Descarga.mp4)
+
 ```
 geTarget.py -d facil -r -w
 ```
 
-![descarga](ejemplos/Descarga.mp4)
+![descarga](ejemplos/Descarga.png)
 
 
 ---
