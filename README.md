@@ -128,7 +128,7 @@ geTarget.py [-h] [-d DIFICULTAD] [-r] [-n NOMBRE] [-p] [-np] [-nb] [-D DONE] [-c
 geTarget.py -d facil -r -w
 ```
 
-![descarga](ejemplos/Descarga.png)
+![descarga](ejemplos/descarga.png)
 
 
 ---
