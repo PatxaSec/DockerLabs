@@ -19,6 +19,12 @@ git clone https://github.com/PatxaSec/DockerLabs.git
 cd DockerLabs
 ```
 ```
+python3 -m venv .
+```
+```
+source bin/activate
+```
+```
 pip3 install -r requirements.txt 
 ```
 #### DISCLAIMER !!
